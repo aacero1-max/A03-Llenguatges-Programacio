@@ -1,0 +1,64 @@
+/*
+  Actividad A05 - Variables ESP32
+*/
+
+// Variable constante
+const int ledPin = 2;
+
+// Variable entera
+int contador = 10;
+
+// Variable long
+long tiempoFuncionamiento = 300000;
+
+// Variable decimal
+float temperatura = 24.5;
+
+// Variable carácter
+char letra = 'A';
+
+// Variable booleana
+bool wifiConectado = false;
+
+void setup() {
+
+  Serial.begin(115200);
+
+  Serial.println("=== EJEMPLO VARIABLES ESP32 ===");
+
+  Serial.print("Contador: ");
+  Serial.println(contador);
+
+  Serial.print("Tiempo: ");
+  Serial.println(tiempoFuncionamiento);
+
+  Serial.print("Temperatura: ");
+  Serial.println(temperatura);
+
+  Serial.print("Letra: ");
+  Serial.println(letra);
+
+  Serial.print("Wifi: ");
+  Serial.println(wifiConectado);
+
+  pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+
+  digitalWrite(ledPin, HIGH);
+  delay(1000);
+
+  digitalWrite(ledPin, LOW);
+  delay(1000);
+
+  contador++;
+
+  Serial.print("Nuevo contador: ");
+  Serial.println(contador);
+
+  temperatura += 0.5;
+
+  Serial.print("Nueva temperatura: ");
+  Serial.println(temperatura);
+}
