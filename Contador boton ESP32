@@ -1,0 +1,54 @@
+#define BUTTON_PIN 13
+#define DEBOUNCE_TIME 50
+
+// Variables debounce
+int lastSteadyState = HIGH;
+int lastFlickerableState = HIGH;
+int currentState;
+unsigned long lastDebounceTime = 0;
+
+// Contador
+int contador = 0;
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+
+  Serial.println("Inici del programa");
+}
+
+// Funció button()
+bool button() {
+
+  currentState = digitalRead(BUTTON_PIN);
+
+  if (currentState != lastFlickerableState) {
+    lastDebounceTime = millis();
+    lastFlickerableState = currentState;
+  }
+
+  if ((millis() - lastDebounceTime) > DEBOUNCE_TIME) {
+
+    if (lastSteadyState != currentState) {
+
+      lastSteadyState = currentState;
+
+      if (currentState == LOW) {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+void loop() {
+
+  if (button()) {
+
+    contador++;
+
+    Serial.print("Numero de pulsacions: ");
+    Serial.println(contador);
+  }
+}
